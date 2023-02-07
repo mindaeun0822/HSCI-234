@@ -12,7 +12,6 @@ def draw():
     p5.background(r+p5.mouseY,g+p5.mouseX,b+p5.mouseY)           # white background
     p5.text(str(p5.mouseX) + ", " + str(p5.mouseY), 10, 20)
 
-
     p5.stroke(61, 40, 133)
 
     #jacket
@@ -22,9 +21,6 @@ def draw():
     #inner shirt
     p5.fill(r,g,b)
     p5.rect(120,200,60,300)
-
-
-
 
     #neck
     p5.fill(105, 77, 70)
@@ -66,7 +62,6 @@ def draw():
     drawHair(120,97,2.6)
     drawHair(175,96,0.5)
 
-    
 def drawEar(x,y):
     p5.push()
     p5.translate(x,y)
@@ -80,9 +75,7 @@ def drawEye(x,y):
     p5.ellipse(0,0,40+p5.mouseX/24,40+p5.mouseY/24)
     p5.fill(66, 60, 44)
     p5.ellipse(0,0,15+p5.mouseX/20,15+p5.mouseY/20)
-
     p5.pop()
-
 
 def drawHair(x,y,z):
     p5.push()
