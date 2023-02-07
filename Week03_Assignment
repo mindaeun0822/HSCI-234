@@ -1,0 +1,92 @@
+import js
+p5 = js.window
+
+r = int(p5.random(0,255)) 
+g = int(p5.random(0,255)) 
+b = int(p5.random(0,255)) 
+
+def setup():
+    p5.createCanvas(300, 300)    # 300 x 300 pixel canvas 
+
+def draw():
+    p5.background(r+p5.mouseY,g+p5.mouseX,b+p5.mouseY)           # white background
+    p5.text(str(p5.mouseX) + ", " + str(p5.mouseY), 10, 20)
+
+
+    p5.stroke(61, 40, 133)
+
+    #jacket
+    p5.fill(72, 84, 75)
+    p5.ellipse(150,300,200,300)
+
+    #inner shirt
+    p5.fill(r,g,b)
+    p5.rect(120,200,60,300)
+
+
+
+
+    #neck
+    p5.fill(105, 77, 70)
+    p5.ellipse(150,225,50,50)
+
+    #ear
+    p5.fill(212, 169, 129)
+    drawEar(83,150)
+    drawEar(217,150)
+
+    #back hair
+    p5.fill(61, 55, 50)
+    p5.ellipse(150,110,130,80)
+
+    #face
+    p5.fill(212, 169, 129)
+    p5.push()
+    p5.translate(150,150)
+    p5.ellipse(0,0,130,150)
+    p5.pop()
+
+    #eye
+    drawEye(120,140)
+    drawEye(180,140)
+
+    #nose
+    p5.ellipse(150,155,15,50)
+    p5.ellipse(140,170,17,17)
+    p5.ellipse(160,170,17,17)
+    p5.ellipse(150,170,20,20)
+
+    #mouth
+    p5.fill(201, 120, 91)
+    p5.ellipse(150,203+p5.mouseY/24,30+p5.mouseX/24,40+p5.mouseY/12)
+
+    #hair
+    p5.noStroke()
+    p5.fill(61, 55, 50)
+    drawHair(120,97,2.6)
+    drawHair(175,96,0.5)
+
+    
+def drawEar(x,y):
+    p5.push()
+    p5.translate(x,y)
+    p5.ellipse(0,0,35,55)
+    p5.pop()
+
+def drawEye(x,y):
+    p5.push()
+    p5.translate(x,y)
+    p5.fill(237, 227, 213)
+    p5.ellipse(0,0,40+p5.mouseX/24,40+p5.mouseY/24)
+    p5.fill(66, 60, 44)
+    p5.ellipse(0,0,15+p5.mouseX/20,15+p5.mouseY/20)
+
+    p5.pop()
+
+
+def drawHair(x,y,z):
+    p5.push()
+    p5.translate(x,y)
+    p5.rotate(z)
+    p5.ellipse(0,0,94,30)
+    p5.pop()
