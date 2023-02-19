@@ -1,0 +1,106 @@
+import js
+p5 = js.window
+
+angle1=0
+angle2=0
+rect_x=0
+rect_y=0
+
+def setup():
+    p5.createCanvas(300, 300)    # 300 x 300 pixel canvas 
+
+def draw():
+    p5.background(54, 56, 87)
+    drawLArm(100,160)
+    drawRArm(210,180)
+    drawBody()
+    drawFace()
+
+def drawFace():
+    #antenna
+    global rect_x, rect_y
+
+    p5.push()
+    if (p5.keyIsPressed == True):
+        if (p5.keyCode == p5.LEFT_ARROW):  
+            rect_x = rect_x - 1
+        elif (p5.keyCode == p5.RIGHT_ARROW): 
+            rect_x = rect_x + 1
+        elif (p5.keyCode == p5.UP_ARROW):  
+            rect_y = rect_y - 1
+        elif (p5.keyCode == p5.DOWN_ARROW): 
+            rect_y = rect_y + 1
+    p5.translate(rect_x, rect_y)
+    p5.line(150,50,150,20)
+    p5.fill(227, 214, 70)
+    p5.ellipse(150,25,15,15)
+    p5.pop()
+    
+    #face
+    p5.fill(158, 165, 173)
+    p5.push()
+    p5.translate(100,50)
+    p5.rect(0,0,100,90)
+    p5.pop()
+
+    #eye color
+    p5.fill(255, 46, 31)
+    if (p5.mouseIsPressed == True):
+        if (p5.mouseButton == p5.LEFT):
+            p5.fill(81, 237, 19) 
+        elif (p5.mouseButton == p5.RIGHT):
+            p5.fill(18, 251, 255) 
+
+    p5.ellipse(125,90,20,20) #left eye
+    p5.ellipse(175,90,20,20) #right eye
+
+    #nose
+    p5.fill(186, 211, 219)
+    p5.rect(142,80,15,35) 
+
+    #mouth
+    p5.fill(235, 237, 237)            
+    p5.rect(117,120,65,10) 
+
+
+def drawBody():
+    #body
+    p5.fill(158, 165, 173)
+    p5.rect(75,140,150,200)
+
+    #name tag
+    p5.fill(246, 255, 0)
+    if (p5.keyIsPressed):
+        if (p5.key == 'a') or (p5.key == 'A'):  
+            p5.fill(255, 119, 0)
+        elif (p5.key == 'b') or (p5.key == 'B'):
+            p5.fill(193, 5, 255)
+        elif (p5.key == 'c') or (p5.key == 'C'):
+            p5.fill(0, 225, 255)
+    else: 
+        p5.fill(246, 255, 0)
+    p5.rect(162,170,45,15)
+
+
+def drawLArm(x,y):
+    global angle2
+
+    p5.fill(225, 228, 232)
+    p5.push()
+    p5.translate(x, y)
+    p5.rotate(angle2)
+    p5.rect(0,0,30,150)
+    angle2 = angle2 + 0.05
+    p5.pop()
+
+
+def drawRArm(x,y):
+    global angle1
+    
+    p5.fill(225, 228, 232)
+    p5.push()
+    p5.translate(x, y)
+    p5.rotate(angle1)
+    p5.rect(0,0,30,150)
+    angle1 = angle1 - 0.05
+    p5.pop()
