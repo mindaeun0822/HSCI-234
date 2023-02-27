@@ -1,0 +1,61 @@
+import js
+p5 = js.window
+
+alpha=0
+
+random_size = int(p5.random(25,125)) 
+random_size2 = int(p5.random(25,125)) 
+random_size3 = int(p5.random(25,125)) 
+random_size4 = int(p5.random(25,125)) 
+
+def setup():
+    p5.createCanvas(300, 300)    # 300 x 300 pixel canvas 
+    print('finished setup')
+
+def draw():
+    global alpha
+    
+    p5.background(255)           # white background
+    p5.strokeWeight(2)  # set stroke thickness
+
+    #square1
+    p5.stroke(127, 0, 255)
+    random_square_at(30,30,random_size)
+
+    #square2, animated
+    p5.stroke(255, 127, 54,alpha)
+    random_square_at(175,30,random_size2)
+    alpha = alpha + 1
+    if (alpha == 255):
+        alpha=0
+
+    #square3, changes color when cursor is inside
+    if(inside_square()):
+        p5.stroke(245, 66, 245)
+    else:
+        p5.stroke(127, 200, 0)
+    random_square_at(30,175,random_size3)
+
+    #square4, shows up only when the cursor is pressed
+    p5.stroke(255, 0, 127)
+    if (p5.mouseIsPressed == True):
+        if (p5.mouseButton == p5.LEFT):
+            random_square_at(175,175,random_size4)
+
+def random_square(size):
+    p5.line(0,0,0+size,0)
+    p5.line(0+size,0,0+size, 0+size)
+    p5.line(0,0,0,0+size)
+    p5.line(0,0+size+0,0+size,0+size)
+
+def random_square_at(x,y,size):
+    p5.push()
+    p5.translate(x,y)
+    random_square(size)
+    p5.pop()
+
+def inside_square():
+    if(p5.mouseX > 30 and p5.mouseX < 30+random_size3 and p5.mouseY >175 and p5.mouseY <175+random_size3):
+        return True
+    else:
+        return False
