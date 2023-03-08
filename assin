@@ -1,0 +1,87 @@
+import js
+p5 = js.window
+
+class Player:
+    x = 0 
+    y = 0 
+    speedX = 1
+    speedY = 1
+
+    def __init__(self, x, y):
+        self.x = x
+        self.y = y
+
+    def draw(self):
+        p5.push()
+        p5.translate(self.x,self.y)
+        p5.fill(2255, 224, 112)
+        p5.ellipse(0,0,30,30)
+        p5.fill(0)
+        p5.ellipse(-5,-5,3,3)
+        p5.ellipse(5,-5,3,3)
+        p5.fill(250, 147, 95)
+        p5.ellipse(0,5,10,10)
+        p5.pop()
+
+def setup():
+    p5.createCanvas(300, 300) 
+    print('finished setup') 
+
+player1 = Player(40,40)
+player2 = Player(200,150)
+    
+def draw():
+    p5.background(255)
+
+    player1.draw()
+    player2.draw()
+
+    p5.fill(0)
+    p5.textSize(18)
+    
+
+
+    p5.text(str(player1.speedX),10,20)
+    p5.text(str(player1.speedY),50,20)
+
+    p5.text(str(player1.x),10,20)
+    p5.text(str(player1.y),50,20)
+
+
+
+
+
+
+
+    player1.x = player1.x + player1.speedX
+    player1.y = player1.y + player1.speedY
+
+
+
+    if(player1.y < 20) or (player1.y > p5.height - 20):
+        player1.y = -(player1.y)
+        break
+
+    if(player1.x < 20) or (player1.x > p5.width - 20):
+        player1.x = -(player1.x)
+        break
+
+   # if(player1.x > 20 or player1.y )
+
+        
+
+
+
+
+
+def keyPressed(event):
+    pass 
+
+def keyReleased(event):
+    pass
+
+def mousePressed(event):
+    pass
+
+def mouseReleased(event):
+    pass
