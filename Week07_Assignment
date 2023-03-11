@@ -114,6 +114,3 @@ def mousePressed(event):
 
 def mouseReleased(event):
     pass
-
-
-
