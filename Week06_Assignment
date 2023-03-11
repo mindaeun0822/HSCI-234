@@ -1,119 +1,42 @@
 import js
 p5 = js.window
-
-
-class Player:
-    x = 0
-    y = 0
-    speedX = 0
-    speedY = 0
-
-    def __init__(self, x, y, speedX, speedY):
-        self.x = x
-        self.y = y
-        self.speedX = speedX
-        self.speedY = speedY
-
-    def draw(self, r, g, b):
-        p5.push()
-        p5.translate(self.x,self.y)
-        p5.fill(r, g, b)
-        p5.ellipse(0,0,30,30)
-        p5.fill(0)
-        p5.ellipse(-5,-5,3,3)
-        p5.ellipse(5,-5,3,3)
-        p5.fill(250, 147, 95)
-        p5.ellipse(0,5,10,10)
-        p5.pop()
+program_timer = p5.millis()
+program_state = 'state1'
 
 def setup():
-    p5.createCanvas(300, 300) 
-    print('finished setup') 
+    p5.createCanvas(300, 300)    # 300 x 300 pixel canvas 
 
-player1 = Player(40,40,p5.random(1, 1.5),p5.random(-1, 1))
-player2 = Player(200,150,0,0)
 
-    
 def draw():
 
-    
-    p5.background(255)
-    p5.fill(0)
-    p5.textSize(12)
-    p5.text('SCORE:' + str(p5.millis()),0,60)
+    global program_state
+    global program_timer
+
+    p5.background(255)           # white background
 
 
+    if(p5.millis() > program_timer + 2000):
+        if(program_state == 'state1'):
+            program_state = 'state2'
 
-    #drawball
-    player1.draw(240, 121, 91)
+        else:
+            program_state = 'state1'
+        program_timer = p5.millis()
 
-    player2.draw(255, 224, 112)
 
-    #move
-    player1.x = player1.x + player1.speedX
-    player1.y = player1.y + player1.speedY
-
-    player2.x = player2.x + player2.speedX
-    player2.y = player2.y + player2.speedY
-
-    #bounce
-    if(player1.y < 20) or (player1.y > p5.height - 20):
-        player1.speedY *= -1
-    
-    if(player1.x < 20) or (player1.x > p5.width - 20):
-        player1.speedX  *= -1
-
-    if(player2.y < 20) or (player2.y > p5.height - 20):
-        player2.speedY  *= -1
-
-    if(player2.x < 20) or (player2.x > p5.width - 20):
-        player2.speedX  *= -1
-
-    #challenge. the ball gets faster and faster.
-    challenge = 1.001
-    
-    player1.speedY *= challenge
-    player1.speedX *= challenge
-
-    #game over
-    dis = p5.dist(player1.x, player1.y, player2.x, player2.y)
-
-    if(dis <= 30):
-        player1.speedY = 0
-        player1.speedX = 0
-        player2.speedY = 0
-        player2.speedX = 0
-        
-        p5.background(0)
-        player1.draw(240, 121, 91)
-        player2.draw(255, 224, 112)
-        
+    if(program_state == 'state1'):
         p5.fill(255)
-        p5.textSize(24)
-        p5.text('YOU LOST!',80,60)
+    elif(program_state == 'state2'):
+        p5.fill(0)
+    elif(program_state == 'state3'):
+        p5.fill(252, 140, 3)
 
-def keyPressed(event):
-    #move
-    if (p5.key == 'ArrowLeft' and player2.x >=15 and player2.x < p5.width - 15):
-        player2.speedX = -1
-    
-    elif(p5.key == 'ArrowRight' and player2.x >=15 and player2.x < p5.width - 15):
-        player2.speedX = 1
 
-    if (p5.key == 'ArrowUp' and player2.y >=15 and player2.y < p5.height - 15):
-        player2.speedY = -1
-    
-    elif(p5.key == 'ArrowDown'and player2.y >=15 and player2.y < p5.height - 15):
-        player2.speedY = 1
-
-def keyReleased(event):
-    pass
+    p5.ellipse(100,120,90,90)
+    p5.rect(170,180,80,40)
 
 def mousePressed(event):
-    pass
+    print('mousePressed..')
+    global program_state
 
-def mouseReleased(event):
-    pass
-
-
-
+    program_state = 'state3'
